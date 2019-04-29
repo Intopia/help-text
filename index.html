@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Accessible help text</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="./favicon.ico">
+  <!-- Google font -->
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
+  <!-- Master CSS file -->
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <!-- Local CSS file if needed -->
+</head>
+<body>
+
+  <!-- skip to content link -->
+  <div class="skip-link">
+    <a href="#main">Skip to content (Press enter)</a>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <h1 class="header__logo"><a href="http://code.intopia.digital"><img src="assets/img/code-intopia.png" alt="Code Intopia"></a></h1>
+    </div>
+  </header>
+
+  <!-- Banner -->
+  <div class="banner">
+    <div class="container">
+      <h2>Accessible help text</h2>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <!-- Navigation -->
+    <nav class="aside">
+      <ul class="menu">
+        <li><a href="#problem">The problem</a></li>
+        <li><a href="#tests">Test criteria</a></li>
+        <li><a href="#solutions">Test cases</a></li>
+        <li><a href="#results">Test results</a></li>
+        <li><a href="#recommendations">Recommendations</a></li>
+        <li><a href="#wcag">WCAG references</a></li>
+        <li><a class="menu__external" href="http://code.intopia.digital">Home</a></li>
+      </ul>
+      <div>
+        <a class="link-primary" href="https://github.com/Intopia/help-text">Download Git repo</a>
+      </div>
+    </nav>
+
+    <!-- Main content -->
+    <main class="main" id="main">
+      <h3 id="problem">The problem</h3>
+      <p>Help text is information associated with an individual form control that provides information for the user on how to fill in the field correctly. If the help text is not correctly associated with the relevant form controls, assistive technology users may not hear these text labels announced as they navigate through forms.</p>
+      <p>Help text should be programmatically associated with its relevant form controls.</p>
+      <hr>
+
+      <h3 id="tests">Test criteria</h3>
+      <ol>
+        <li>Is the help text announced when the form control recieves focus?</li>
+      </ol>
+      <hr>
+
+      <h3 id="examples">Test cases</h3>
+      <h4 id="example1">Example 1: No association</h4>
+      <div class="example">
+        <div class="input">
+          <label class="input__label" for="example01">Example 1</label>
+          <span class="message-hint">Help text</span>
+          <input class="input__control" type="text" id="example01">
+        </div>
+      </div>
+<pre><code class="language-markup">&lt;div class="input"&gt;
+  &lt;label class="input__label" for="example01"&gt;Example 1&lt;/label&gt;
+  &lt;span class="message-hint"&gt;Help text&lt;/span&gt;
+  &lt;input class="input__control" type="text" id="example01"&gt;
+&lt;/div&gt;
+</code></pre>
+
+      <h4 id="example2">Example 2: Label wrapped around help text</h4>
+      <div class="example">
+        <div class="input">
+          <label for="example02">
+            <span class="input__label">Example 2</span>
+            <span class="message-hint">Help text</span>
+            <input class="input__control" type="text" id="example02">
+          </label>
+        </div>
+      </div>
+<pre><code class="language-markup">&lt;div class="input"&gt;
+  &lt;label for="example02"&gt;
+    &lt;span class="input__label"&gt;Example 2&lt;/span&gt;
+    &lt;span class="message-hint"&gt;Help text&lt;/span&gt;
+    &lt;input class="input__control" type="text" id="example02"&gt;
+  &lt;/label&gt;
+&lt;/div&gt;
+</code></pre>
+
+      <h4 id="example3">Example 3: Using the <code>aria-describedby</code> and <code>id</code> attributes</h4>
+      <div class="example">
+        <div class="input">
+          <label class="input__label" for="example03">Example 3</label>
+          <span class="message-hint" id="message03">Help text</span>
+          <input class="input__control" type="text" id="example03" aria-describedby="message03">
+        </div>
+      </div>
+<pre><code class="language-markup">&lt;div class="input"&gt;
+  &lt;label class="input__label" for="example03"&gt;Example 3&lt;/label&gt;
+  &lt;span class="message-hint" id="message03"&gt;Help text&lt;/span&gt;
+  &lt;input class="input__control" type="text" id="example03" aria-describedby="message03"&gt;
+&lt;/div&gt;
+</code></pre>
+      <hr>
+
+      <h3 id="results">Test results</h3>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Environment</th>
+              <th>Example1</th>
+              <th>Example2</th>
+              <th>Example3</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Win/Edge/NVDA</td>
+              <td><span class="fail">Fail</span></td>
+              <td><span class="pass">Pass</span></td>
+              <td><span class="pass">Pass</span></td>
+            </tr>
+            <tr>
+              <td>Win/Chrome/NVDA</td>
+              <td><span class="fail">Fail</span></td>
+              <td><span class="pass">Pass</span></td>
+              <td><span class="pass">Pass</span></td>
+            </tr>
+            <tr>
+              <td>Win/Firefox/NVDA</td>
+              <td><span class="fail">Fail</span></td>
+              <td><span class="pass">Pass</span></td>
+              <td><span class="pass">Pass</span></td>
+            </tr>
+            <tr>
+              <td>Win/Edge/JAWS</td>
+              <td><span class="fail">Fail</span></td>
+              <td><span class="pass">Pass</span></td>
+              <td><span class="fail">Fail</span></td>
+            </tr>
+            <tr>
+              <td>Win/Chrome/JAWS</td>
+              <td><span class="fail">Fail</span></td>
+              <td><span class="pass">Pass</span></td>
+              <td><span class="pass">Pass</span></td>
+            </tr>
+            <tr>
+              <td>Win/Firefox/JAWS</td>
+              <td><span class="fail">Fail</span></td>
+              <td><span class="pass">Pass</span></td>
+              <td><span class="pass">Pass</span></td>
+            </tr>
+            <tr>
+              <td>OSX/Chrome/Voiceover</td>
+              <td><span class="pass">Pass</span></td>
+              <td><span class="pass">Pass</span></td>
+              <td><span class="pass">Pass</span></td>
+            </tr>
+            <tr>
+              <td>OSX/Firefox/Voiceover</td>
+              <td>N/A</td>
+              <td>N/A</td>
+              <td>N/A</td>
+            </tr>
+            <tr>
+              <td>OSX/Safari/Voiceover</td>
+              <td><span class="fail">Fail</span></td>
+              <td><span class="pass">Pass</span></td>
+              <td><span class="pass">Pass</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <hr>
+
+      <h3 id="recommendations">Recommendations</h3>
+      <p>While <a href="#example2">Example 2: Label wrapped around help text</a> is well supported across Assistive Technologies, <a href="#example3">Example 3: Using the <code>aria-describedby</code> and <code>id</code> attributes</a> is the <b>recommended solution</b> as it is often easier to apply within complex systems.</p>
+      <hr>
+
+      <h3 id="wcag">Related WCAG references</h3>
+      <h4>Success criterion</h4>
+      <ul>
+        <li>[Success criterion]</li>
+      </ul>
+      <h4>Sufficient techniques</h4>
+      <ul>
+        <li>[Sufficient techniques]</li>
+      </ul>
+      <hr>
+
+    </main>
+  </div>
+
+<script src="assets/js/prism.js"></script>
+</body>
+</html>
